@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Home from "./pages/Home";
 import MainLayout from "./layouts/MainLayout";
+import Cities from "./pages/Cities";
 
 const App = () => {
   return (
     <MainLayout>
-      <Home />
+      {/* <Home /> */}
+      <Cities />
     </MainLayout>
   );
 };
