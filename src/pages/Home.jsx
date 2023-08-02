@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Carousel from "../components/Carousel";
 import NavLayout from "../layouts/NavLayout";
 
@@ -27,7 +27,10 @@ let data = [
 
 const Home = () => {
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" , m:5}}>
+    <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
+      <Typography variant="h2" color="initial">
+        Popular Mytineraries
+      </Typography>
       <Carousel images={data} />
     </Box>
   );
