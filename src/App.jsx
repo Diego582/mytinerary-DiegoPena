@@ -6,8 +6,8 @@ import Cities from "./pages/Cities";
 const App = () => {
   return (
     <MainLayout>
-      {/* <Home /> */}
-      <Cities />
+      <Home />
+      {/*  <Cities /> */}
     </MainLayout>
   );
 };

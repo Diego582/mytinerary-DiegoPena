@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import Carousel from "../components/Carousel";
 import NavLayout from "../layouts/NavLayout";
 
@@ -27,11 +27,31 @@ let data = [
 
 const Home = () => {
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
-      <Typography variant="h2" color="initial">
-        Popular Mytineraries
-      </Typography>
-      <Carousel images={data} />
+    <Box
+      sx={{ display: "flex", justifyContent: "center", width: "80vw", mt: 3 }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          width: "40%",
+          p: 3,
+          alignContent: "space-between",
+        }}
+      >
+        <Typography variant="h4" color="initial" sx={{ textAlign: "center" }}>
+          Find the perfect destination
+        </Typography>
+        <Typography variant="h6" color="initial" sx={{ textAlign: "justify" }}>
+          Our app will help you find the perfect path for your next trip. With
+          an easy-to-use interface and a host of itinerary options, planning
+          your next trip has never been easier.
+        </Typography>
+        <Button variant="contained">View More</Button>
+      </Box>
+      <Box sx={{ width: "40%", p: 3 }}>
+        <Carousel images={data} />
+      </Box>
     </Box>
   );
 };

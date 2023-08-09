@@ -7,7 +7,7 @@ import { ImageList } from "@mui/material";
 export default function CardCity() {
   return (
     <>
-      <Typography variant="h1" color="initial">
+      <Typography variant="h3" color="initial">
         CARD CITY
       </Typography>
       <ImageList

@@ -32,7 +32,7 @@ const Carousel = ({ images }) => {
   carousel.push(imagenes.slice(12, 16));
   console.log(carousel, "carousel");
   return (
-    <Container disableGutters sx={{ width: "75vw" }}>
+    <Container disableGutters sx={{ width: "50vw" }}>
       {carousel &&
         carousel.map((item, index) => {
           console.log(item, "itemCarousel");
@@ -66,7 +66,7 @@ const Carousel = ({ images }) => {
                       {item &&
                         item.map((img, index) => {
                           return (
-                            <ImageListItem key={index} sx={{ width: "30vw" }}>
+                            <ImageListItem key={index} sx={{ width: "20vw" }}>
                               <img
                                 src={img.photo}
                                 srcSet={img.photo}
