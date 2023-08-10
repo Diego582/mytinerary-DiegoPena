@@ -1,10 +1,12 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import CardCity from "../components/CardCity";
 
 const Cities = () => {
   return (
     <Box>
-      <CardCity />
+      <Typography variant="h3" sx={{ m: 2, textAlign: "center" }}>
+        This is Cities
+      </Typography>
     </Box>
   );
 };

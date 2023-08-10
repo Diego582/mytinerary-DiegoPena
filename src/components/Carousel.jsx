@@ -13,94 +13,91 @@ import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 
 const Carousel = ({ images }) => {
-  const [imagenes] = useState(images);
   const [position, setPosition] = useState(0);
-  const cantidad = imagenes?.length / 4;
+  const [positionTo, setPositionTo] = useState(4);
 
   const handleNextPosition = () => {
-    setPosition(position === cantidad - 1 ? 0 : position + 1);
+    setPosition(images.length <= positionTo ? 0 : position + 4);
+    setPositionTo(images.length <= positionTo ? 4 : positionTo + 4);
   };
 
   const handleBeforePosition = () => {
-    setPosition(position === 0 ? cantidad - 1 : position - 1);
+    setPosition(position == 0 ? images.length - 4 : position - 4);
+    setPositionTo(position == 0 ? images.length : positionTo - 4);
   };
 
-  const carousel = [];
-  carousel.push(imagenes.slice(0, 4));
-  carousel.push(imagenes.slice(4, 8));
-  carousel.push(imagenes.slice(8, 12));
-  carousel.push(imagenes.slice(12, 16));
-  console.log(carousel, "carousel");
+  if (images.length > 0) {
+    setTimeout(handleNextPosition, 5000);
+  }
+
   return (
-    <Container disableGutters sx={{ width: "50vw" }}>
-      {carousel &&
-        carousel.map((item, index) => {
-          console.log(item, "itemCarousel");
+    <Container disableGutters sx={{ width: { md: "50vw" } }}>
+      {images.length > 0 &&
+        [images.slice(position, positionTo)].map((item, index) => {
+          console.log(position, "position en container");
+          console.log(positionTo, "position en container");
           return (
             <Box key={index}>
-              {position === index && (
-                <Grid
-                  margin={0}
-                  container
+              <Grid
+                margin={0}
+                container
+                sx={{
+                  display: "flex",
+                  flexGrow: 0.5,
+                  justifyContent: "space-between",
+                }}
+              >
+                <Card
+                  xs={12}
                   sx={{
-                    display: "flex",
-                    flexGrow: 0.5,
-                    justifyContent: "space-between",
+                    backgroundColor: "#EBEBEB",
+                    padding: 0,
                   }}
                 >
-                  <Card
-                    xs={12}
+                  <Box
                     sx={{
-                      backgroundColor: "#EBEBEB",
-                      padding: 0,
+                      display: "flex",
+                      justifyContent: { xs: "space-around" },
+                      flexWrap: "wrap",
                     }}
                   >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        flexWrap: "wrap",
-                        gap: 3,
-                      }}
-                    >
-                      {item &&
-                        item.map((img, index) => {
-                          return (
-                            <ImageListItem key={index} sx={{ width: "20vw" }}>
-                              <img
-                                src={img.photo}
-                                srcSet={img.photo}
-                                alt={img.city}
-                                loading="lazy"
-                              />
-                              <ImageListItemBar
-                                title={img.city}
-                                sx={{ textAlign: "center" }}
-                              />
-                            </ImageListItem>
-                          );
-                        })}
-                    </Box>
-                    <CardActions
-                      sx={{
-                        display: "flex",
-                        flexGrow: 0.5,
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <IconButton
-                        color="primary"
-                        onClick={handleBeforePosition}
-                      >
-                        <ArrowCircleLeftIcon />
-                      </IconButton>
-                      <IconButton color="primary" onClick={handleNextPosition}>
-                        <ArrowCircleRightIcon />
-                      </IconButton>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              )}
+                    {item.length > 0 &&
+                      item.map((img, index) => {
+                        return (
+                          <ImageListItem
+                            key={index}
+                            sx={{ m: 1, width: { xs: "60vw", sm: "20vw" } }}
+                          >
+                            <img
+                              src={img.photo}
+                              srcSet={img.photo}
+                              alt={img.city}
+                              loading="lazy"
+                            />
+                            <ImageListItemBar
+                              title={img.city}
+                              sx={{ textAlign: "center" }}
+                            />
+                          </ImageListItem>
+                        );
+                      })}
+                  </Box>
+                  <CardActions
+                    sx={{
+                      display: "flex",
+                      flexGrow: 0.5,
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <IconButton color="primary" onClick={handleBeforePosition}>
+                      <ArrowCircleLeftIcon />
+                    </IconButton>
+                    <IconButton color="primary" onClick={handleNextPosition}>
+                      <ArrowCircleRightIcon />
+                    </IconButton>
+                  </CardActions>
+                </Card>
+              </Grid>
             </Box>
           );
         })}

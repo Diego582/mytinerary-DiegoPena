@@ -1,40 +1,34 @@
 import { Box, Typography, Button } from "@mui/material";
 import Carousel from "../components/Carousel";
 import NavLayout from "../layouts/NavLayout";
-
-let data = [
-  { id: "america1", city: "Cancun", photo: "/img/america/cancun.jpg" },
-  { id: "america2", city: "New York", photo: "/img/america/newyork.jpg" },
-  {
-    id: "america3",
-    city: "Rio de Janeiro",
-    photo: "/img/america/rioDeJaneiro.jpg",
-  },
-  { id: "america4", city: "Ushuaia", photo: "/img/america/ushuaia.jpg" },
-  { id: "asia1", city: "Bangkok", photo: "/img/asia/bangkok.jpg" },
-  { id: "asia2", city: "Pekin", photo: "/img/asia/pekin.jpg" },
-  { id: "asia3", city: "Singapur", photo: "/img/asia/singapur.jpg" },
-  { id: "asia4", city: "Tokyo", photo: "/img/asia/tokio.jpg" },
-  { id: "europe1", city: "Ibiza", photo: "/img/europe/ibiza.jpg" },
-  { id: "europe2", city: "London", photo: "/img/europe/london.jpg" },
-  { id: "europe3", city: "Paris", photo: "/img/europe/paris.jpg" },
-  { id: "europe4", city: "Roma", photo: "/img/europe/roma.jpg" },
-  { id: "oceania1", city: "Majuro", photo: "/img/oceania/majuro.jpg" },
-  { id: "oceania2", city: "Sidney", photo: "/img/oceania/sidney.jpg" },
-  { id: "oceania3", city: "Suva", photo: "/img/oceania/suva.jpg" },
-  { id: "oceania4", city: "Wellington", photo: "/img/oceania/wellington.jpg" },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Home = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios("/cities.json")
+      .then(res => setData(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  
   return (
     <Box
-      sx={{ display: "flex", justifyContent: "center", width: "80vw", mt: 3 }}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        width: { md: "80vw" },
+        mt: 3,
+        flexWrap: "wrap",
+      }}
     >
       <Box
         sx={{
           display: "flex",
           flexWrap: "wrap",
-          width: "40%",
+          width: { xs: "80%", sm: "40%" },
           p: 3,
           alignContent: "space-between",
         }}
@@ -49,7 +43,7 @@ const Home = () => {
         </Typography>
         <Button variant="contained">View More</Button>
       </Box>
-      <Box sx={{ width: "40%", p: 3 }}>
+      <Box sx={{ width: { xs: "80%", sm: "40%" }, p: 3 }}>
         <Carousel images={data} />
       </Box>
     </Box>

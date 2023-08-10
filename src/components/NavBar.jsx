@@ -1,16 +1,9 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  ImageListItem,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, ImageListItem, Menu, MenuItem } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import ButNav from "./ButNav";
 import MenuNav from "./MenuNav";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -37,21 +30,27 @@ export default function NavBar() {
             alignItems: "center",
           }}
         >
-          <ImageListItem sx={{ width: "20vw" }}>
+          <ImageListItem sx={{ width: { xs: "70vw", sm: "20vw" } }}>
             <img src="./logo.png" alt="Logo" loading="lazy" />
           </ImageListItem>
           <Box sx={{ display: { xs: "block", sm: "none" } }}>
             <MenuNav handleClick={handleClick} />
           </Box>
           <Box sx={{ m: 1, p: 1, display: { xs: "none", sm: "block" } }}>
-            <ButNav variant="text" icon="" color="black" text="Home" />
-            <ButNav variant="text" icon="" color="black" text="Cities" />
-            <ButNav
-              variant="contained"
-              icon={<PersonIcon />}
-              color=""
-              text="Login"
-            />
+            <Link to="/">
+              <ButNav variant="text" icon="" color="black" text="Home" />
+            </Link>
+            <Link to="/cities">
+              <ButNav variant="text" icon="" color="black" text="Cities" />
+            </Link>
+            <Link to="/signin">
+              <ButNav
+                variant="contained"
+                icon={<PersonIcon />}
+                color=""
+                text="Login"
+              />
+            </Link>
           </Box>
           <Menu
             id="demo-positioned-menu"
@@ -68,20 +67,26 @@ export default function NavBar() {
               horizontal: "left",
             }}
           >
-            <MenuItem onClick={handleClose}>
-              <ButNav variant="text" icon="" color="black" text="Home" />
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ButNav variant="text" icon="" color="black" text="Cities" />
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ButNav
-                variant="contained"
-                icon={<PersonIcon />}
-                color=""
-                text="Login"
-              />
-            </MenuItem>
+            <Link to="/">
+              <MenuItem onClick={handleClose}>
+                <ButNav variant="text" icon="" color="black" text="Home" />
+              </MenuItem>
+            </Link>
+            <Link to="/cities">
+              <MenuItem onClick={handleClose}>
+                <ButNav variant="text" icon="" color="black" text="Cities" />
+              </MenuItem>
+            </Link>
+            <Link to="/signin">
+              <MenuItem onClick={handleClose}>
+                <ButNav
+                  variant="contained"
+                  icon={<PersonIcon />}
+                  color=""
+                  text="Login"
+                />
+              </MenuItem>
+            </Link>
           </Menu>
         </Box>
       </AppBar>

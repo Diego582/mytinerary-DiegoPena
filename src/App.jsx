@@ -2,13 +2,15 @@ import { useState } from "react";
 import Home from "./pages/Home";
 import MainLayout from "./layouts/MainLayout";
 import Cities from "./pages/Cities";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 
 const App = () => {
   return (
-    <MainLayout>
+    /*   <MainLayout>
       <Home />
-      {/*  <Cities /> */}
-    </MainLayout>
+    </MainLayout> */
+    <RouterProvider router={router} />
   );
 };
 
