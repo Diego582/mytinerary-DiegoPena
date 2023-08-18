@@ -3,14 +3,15 @@ import CardCity from "../components/CardCity";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SearchIcon from "@mui/icons-material/Search";
+import apiUrl from "../apiUrl";
 
 const Cities = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    axios("/cities.json")
-      .then((res) => setData(res.data))
+    axios(apiUrl + "cities")
+      .then((res) => setData(res.data.response))
       .catch((err) => console.log(err));
   }, []);
 
