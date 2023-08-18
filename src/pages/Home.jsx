@@ -3,17 +3,17 @@ import Carousel from "../components/Carousel";
 import NavLayout from "../layouts/NavLayout";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import apiUrl from "../apiUrl.js";
 
 const Home = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios("/cities.json")
-      .then(res => setData(res.data))
+    axios(apiUrl + "cities/carousel")
+      .then((res) => setData(res.data.data_carousel))
       .catch((err) => console.log(err));
   }, []);
 
-  
   return (
     <Box
       sx={{
