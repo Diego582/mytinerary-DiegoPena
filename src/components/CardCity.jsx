@@ -9,6 +9,8 @@ import {
   ImageListItemBar,
   Button,
   Card,
+  CardMedia,
+  CardContent,
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Link } from "react-router-dom";
@@ -80,8 +82,17 @@ export default function CardCity({ images }) {
             );
           })}
         {images.length == 0 && (
-          <Card>
-            <Typography variant="h1">No hay resultados </Typography>
+          <Card sx={{ maxWidth: 345 }}>
+            <CardMedia component="img" height="200" image="/search.jpg" />
+            <CardContent>
+              <Typography variant="h5">
+                No city matching the search was found.
+              </Typography>
+
+              <Typography variant="body2" color="text.secondary">
+                Try another city or remove the search filters.
+              </Typography>
+            </CardContent>
           </Card>
         )}
       </ImageList>
