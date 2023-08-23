@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import MainLayout from "./layouts/MainLayout";
 import Cities from "./pages/Cities";
 import SignIn from "./pages/SignIn";
+import CityDetail from "./pages/CityDetail";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/cities", element: <Cities /> },
       { path: "/signin", element: <SignIn /> },
+      { path: "/cities/:id", element: <CityDetail /> },
     ],
   },
 ]);

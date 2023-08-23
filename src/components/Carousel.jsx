@@ -4,6 +4,7 @@ import {
   CardActions,
   Grid,
   IconButton,
+  ImageList,
   ImageListItem,
   ImageListItemBar,
 } from "@mui/material";
@@ -34,8 +35,6 @@ const Carousel = ({ images }) => {
     <Container disableGutters sx={{ width: { md: "50vw" } }}>
       {images.length > 0 &&
         [images.slice(position, positionTo)].map((item, index) => {
-          console.log(position, "position en container");
-          console.log(positionTo, "position en container");
           return (
             <Box key={index}>
               <Grid
@@ -54,12 +53,13 @@ const Carousel = ({ images }) => {
                     padding: 0,
                   }}
                 >
-                  <Box
+                  <ImageList
                     sx={{
                       display: "flex",
                       justifyContent: { xs: "space-around" },
                       flexWrap: "wrap",
                     }}
+                    rowHeight={140}
                   >
                     {item.length > 0 &&
                       item.map((img, index) => {
@@ -81,7 +81,7 @@ const Carousel = ({ images }) => {
                           </ImageListItem>
                         );
                       })}
-                  </Box>
+                  </ImageList>
                   <CardActions
                     sx={{
                       display: "flex",

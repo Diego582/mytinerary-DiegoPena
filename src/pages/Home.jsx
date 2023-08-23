@@ -4,6 +4,7 @@ import NavLayout from "../layouts/NavLayout";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import apiUrl from "../apiUrl.js";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -41,7 +42,9 @@ const Home = () => {
           an easy-to-use interface and a host of itinerary options, planning
           your next trip has never been easier.
         </Typography>
-        <Button variant="contained">View More</Button>
+        <Link to="/cities">
+          <Button variant="contained">View More</Button>
+        </Link>
       </Box>
       <Box sx={{ width: { xs: "80%", sm: "40%" }, p: 3 }}>
         <Carousel images={data} />

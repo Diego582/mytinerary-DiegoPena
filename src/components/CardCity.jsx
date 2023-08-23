@@ -8,76 +8,82 @@ import {
   ImageListItem,
   ImageListItemBar,
   Button,
+  Card,
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { Link } from "react-router-dom";
 
 export default function CardCity({ images }) {
   return (
     <>
-      <Typography variant="h3" color="initial" sx={{ m: 2 }}>
-        Esto es City
-      </Typography>
       <ImageList
         sx={{
           display: "flex",
           justifyContent: { xs: "space-around" },
           flexWrap: "wrap",
         }}
+        rowHeight={{ xs: 200, sm: 150 }}
       >
         {images.length > 0 &&
           images.map((img, index) => {
             return (
               <ImageListItem
+                key={index}
                 sx={{
                   m: 1,
-                  width: { xs: "60vw", sm: "23vw" },
+                  width: { xs: "60vw", sm: "30vw", md: "20vw" },
                   height: { xs: "30vh", sm: "23vh" },
                   borderRadius: "50%",
                 }}
               >
-                <img
-                  src={img.photo}
-                  srcSet={`${img.city}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                  alt={img.city}
-                  loading="lazy"
-                />
+                <img src={img.photo} alt={img.city} loading="lazy" />
+
                 <ImageListItemBar
                   sx={{
+                    width: "100%",
+                    height: "100%",
                     background:
                       "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
                       "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+                    display: "grid",
+                    justifyContent: "space-between",
                   }}
                   position="top"
                   title={img.city}
                   actionIcon={
-                    <IconButton sx={{ color: "rgba(255, 255, 255, 0.54)" }}>
-                      <LocationOnIcon />
-                    </IconButton>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        width: "100%",
+                      }}
+                    >
+                      <Box sx={{ width: "100%", mb: 4 }}>
+                        <IconButton sx={{ color: "rgba(255, 255, 255, 0.54)" }}>
+                          <LocationOnIcon />
+                          <Typography variant="subtitle2">
+                            {img.country}
+                          </Typography>
+                        </IconButton>
+                      </Box>
+                      <Box sx={{ width: "100%", mb: 1, ml: 1 }}>
+                        <Link to={img._id}>
+                          <Button size="small" variant="contained">
+                            View More
+                          </Button>
+                        </Link>
+                      </Box>
+                    </Box>
                   }
-                >
-                  <Button variant="contained">View More</Button>
-                </ImageListItemBar>
+                ></ImageListItemBar>
               </ImageListItem>
             );
           })}
-
-        {/*    {images.length > 0 &&
-          images.map((img, index) => {
-            return (
-              <ImageListItem sx={{ m: 1, width: { xs: "60vw", sm: "20vw" } }}>
-                <img
-                  src={img.photo}
-                  srcSet={img.photo}
-                  alt={img.city}
-                  loading="lazy"
-                />
-                <ImageListItemBar
-                  title={img.city}
-                  sx={{ textAlign: "center" }}
-                />
-              </ImageListItem>
-            );
-          })} */}
+        {images.length == 0 && (
+          <Card>
+            <Typography variant="h1">No hay resultados </Typography>
+          </Card>
+        )}
       </ImageList>
     </>
   );
