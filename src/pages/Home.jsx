@@ -5,14 +5,22 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import apiUrl from "../apiUrl.js";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import city_actions from "../store/actions/cities";
+const { read_carousel } = city_actions;
 
 const Home = () => {
   const [data, setData] = useState([]);
+  const carousel = useSelector((store) => {
+    console.log(store,'store');
+    store.cities.carousel;
+  });
+  const dispatch = useDispatch();
 
+  console.log(carousel, "carousel");
+  console.log(data, "data");
   useEffect(() => {
-    axios(apiUrl + "cities/carousel")
-      .then((res) => setData(res.data.data_carousel))
-      .catch((err) => console.log(err));
+    dispatch(read_carousel());
   }, []);
 
   return (
