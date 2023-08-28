@@ -43,7 +43,7 @@ const Carousel = ({ images }) => {
   const [data, setData] = useState([]);
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = images.length / 4;
+  const [maxSteps, setMaxSteps] = useState(0);
   const [initCount, setInitCount] = useState(true);
   console.log(data, "data");
   console.log(maxSteps, "maxSteps");
@@ -60,7 +60,7 @@ const Carousel = ({ images }) => {
   };
   console.log(images);
 
-  if (initCount && images.length > 8) {
+  if (initCount && images && images.length > 8) {
     let count = 0;
     let itemsImages = [];
     let arrayImages = [];
