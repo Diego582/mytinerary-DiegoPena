@@ -10,10 +10,16 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import SearchIcon from "@mui/icons-material/Search";
 import apiUrl from "../apiUrl";
+import { useDispatch, useSelector } from "react-redux";
+import city_actions from "../store/actions/cities";
+const { read_cities } = city_actions;
 
 const Cities = () => {
   const [data, setData] = useState([""]);
   const [refSearch, setSearch] = useState({ city: "" });
+  const cities = useSelector((store) => store.cities.cities);
+  console.log(cities, "cities");
+  const dispatch = useDispatch();
 
   const handleFilter = (e) => {
     const { name, value } = e.target;
@@ -24,9 +30,10 @@ const Cities = () => {
   };
 
   useEffect(() => {
-    axios(apiUrl + "cities?city=" + refSearch.city)
+    /* axios(apiUrl + "cities?city=" + refSearch.city)
       .then((res) => setData(res.data.response))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err)); */
+    dispatch(read_cities({ filtered: refSearch.city }));
   }, [refSearch]);
 
   return (
@@ -44,7 +51,7 @@ const Cities = () => {
           variant="outlined"
         />
       </Box>
-      <CardCity images={data} />
+      <CardCity images={cities} />
     </Box>
   );
 };

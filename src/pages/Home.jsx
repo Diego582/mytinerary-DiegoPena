@@ -11,14 +11,11 @@ const { read_carousel } = city_actions;
 
 const Home = () => {
   const [data, setData] = useState([]);
-  const carousel = useSelector((store) => {
-    console.log(store, "store");
-    store.cities.carousel;
-  });
+  const carousel = useSelector((store) => store.cities.carousel);
   const dispatch = useDispatch();
 
-  console.log(carousel, "carousel");
-  console.log(data, "data");
+  
+
   useEffect(() => {
     dispatch(read_carousel());
   }, []);

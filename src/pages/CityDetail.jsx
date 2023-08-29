@@ -13,17 +13,22 @@ import axios from "axios";
 
 import apiUrl from "../apiUrl";
 import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import city_actions from "../store/actions/cities";
+const { read_city } = city_actions;
 
 const CityDetail = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const params = useParams();
+  const city = useSelector((store) => store.cities.city);
+  const dispatch = useDispatch();
+
   console.log(params, "esto es params");
+  console.log(city, "esto es city");
 
   useEffect(() => {
-    axios(apiUrl + "cities/" + params.id)
-      .then((res) => setData(res.data.response))
-      .catch((err) => console.log(err));
+    dispatch(read_city({ id: params.id }));
   }, []);
 
   return (
@@ -33,12 +38,12 @@ const CityDetail = () => {
           <CardMedia
             component="img"
             sx={{ height: "50vh" }}
-            src={data.photo}
-            title={data.city}
+            src={city.photo}
+            title={city.city}
           />
           <CardContent>
             <Typography variant="subtitle1" color="initial">
-              {data.city}
+              {city.city}
             </Typography>
           </CardContent>
           <CardActions sx={{ display: "flex", justifyContent: "center" }}>
