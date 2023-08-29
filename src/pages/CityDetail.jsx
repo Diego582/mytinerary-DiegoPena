@@ -15,7 +15,8 @@ import apiUrl from "../apiUrl";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import city_actions from "../store/actions/cities";
-import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+
+import CardCityDetail from "../components/CardCityDetail";
 const { read_city } = city_actions;
 
 const CityDetail = () => {
@@ -34,35 +35,7 @@ const CityDetail = () => {
 
   return (
     <Box sx={{ textAlign: "center" }}>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Card sx={{ width: "75vw", m: 2 }}>
-          {/*   <CardMedia
-            component="img"
-            sx={{ height: "50vh" }}
-            src={city.photo}
-            title={city.city}
-          /> */}
-          <CardContent>
-            <Typography variant="h6" color="initial">
-              {city.city}
-            </Typography>
-            <Typography variant="subtitle2" color="initial">
-              {city.description}
-            </Typography>
-          </CardContent>
-          <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-            <Button
-              endIcon={<KeyboardDoubleArrowDownIcon />}
-              variant="contained"
-            >
-              View Itineraries
-            </Button>
-          </CardActions>
-          <Typography variant="h6" color="initial">
-            Under construction
-          </Typography>
-        </Card>
-      </Box>
+      <CardCityDetail city={city} />
     </Box>
   );
 };
