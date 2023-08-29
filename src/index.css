@@ -2,3 +2,8 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.Main-Layout {
+  background-color: #ebebeb;
+  min-height: "100vh";
+}

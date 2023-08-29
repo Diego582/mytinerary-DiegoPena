@@ -30,9 +30,6 @@ const Cities = () => {
   };
 
   useEffect(() => {
-    /* axios(apiUrl + "cities?city=" + refSearch.city)
-      .then((res) => setData(res.data.response))
-      .catch((err) => console.log(err)); */
     dispatch(read_cities({ filtered: refSearch.city }));
   }, [refSearch]);
 
