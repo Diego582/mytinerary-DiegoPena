@@ -24,7 +24,7 @@ export default function CardCity({ images }) {
           justifyContent: { xs: "space-around" },
           flexWrap: "wrap",
         }}
-        rowHeight={{ xs: 200, sm: 150 }}
+        rowHeight={175}
       >
         {images.length > 0 &&
           images.map((img, index) => {

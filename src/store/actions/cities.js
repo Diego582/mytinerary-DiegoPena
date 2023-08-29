@@ -21,5 +21,43 @@ const read_carousel = createAsyncThunk(
   }
 );
 
-const city_actions = { read_carousel };
+const read_cities = createAsyncThunk(
+  "read_cities", //nombre de la accion
+  async (obj) => {
+    //callback que realiza la petición
+    try {
+      let data = await axios(apiUrl + "cities?city=" + obj.filtered);
+      console.log(data);
+      return {
+        cities: data.data.response,
+      };
+    } catch (error) {
+      console.log(error);
+      return {
+        cities: [],
+      };
+    }
+  }
+);
+
+const read_city = createAsyncThunk(
+  "read_city", //nombre de la accion
+  async (obj) => {
+    //callback que realiza la petición
+    try {
+      let data = await axios(apiUrl + "cities/" + obj.id);
+      console.log(data);
+      return {
+        city: data.data.response,
+      };
+    } catch (error) {
+      console.log(error);
+      return {
+        city: {},
+      };
+    }
+  }
+);
+
+const city_actions = { read_carousel, read_cities, read_city };
 export default city_actions;
