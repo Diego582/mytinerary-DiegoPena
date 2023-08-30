@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import city_actions from "../store/actions/cities";
 
 import CardCityDetail from "../components/CardCityDetail";
+import Features from "../components/Features";
+import Itinerary from "../components/Itinerary";
 const { read_city } = city_actions;
 
 const CityDetail = () => {
@@ -28,14 +30,31 @@ const CityDetail = () => {
 
   console.log(params, "esto es params");
   console.log(city, "esto es city");
+  console.log(city.photo, "esto es city photo");
 
   useEffect(() => {
     dispatch(read_city({ id: params.id }));
   }, []);
-
+  const urlImg = "url(" + city.photo + ")";
   return (
-    <Box sx={{ textAlign: "center" }}>
-      <CardCityDetail city={city} />
+    <Box
+      sx={{
+        textAlign: "center",
+      }}
+    >
+      <Box
+        sx={{
+          backgroundImage: urlImg,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          width: "100%",
+          minHeight: "100vh",
+        }}
+      >
+        <CardCityDetail city={city} />
+        <Itinerary />
+      </Box>
+      <Features city={city} />
     </Box>
   );
 };
