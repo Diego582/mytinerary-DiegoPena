@@ -52,8 +52,8 @@ const CityDetail = () => {
         }}
       >
         <CardCityDetail city={city} />
-        <Itinerary />
       </Box>
+      <Itinerary filter={params} />
       <Features city={city} />
     </Box>
   );
