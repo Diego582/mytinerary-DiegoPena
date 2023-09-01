@@ -1,6 +1,7 @@
 import { ExpandMore } from "@mui/icons-material";
 import {
   Avatar,
+  Box,
   Card,
   CardActions,
   CardContent,
@@ -28,20 +29,31 @@ export default function Itinerary({ filter }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  console.log(filter, "parametro de itineraries");
+
   useEffect(() => {
     dispatch(read_itineraries_city({ filter }));
   }, []);
 
   return (
-    <>
-      {!itineraries
-        ? null
-        : itineraries.map((iti, index) => {
-            <Card key={index} sx={{ maxWidth: 345 }}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-around",
+        flexWrap: "wrap",
+        m: 3,
+        gap: 3,
+      }}
+    >
+      <Typography variant="h3" sx={{ width: "80vw" }}>
+        Itineraries{" "}
+      </Typography>
+      {itineraries &&
+        itineraries.map((iti, index) => {
+          return (
+            <Card key={index} sx={{ width: { xs: "80vw", md: "60vw" } }}>
               <CardMedia
                 component="img"
-                height="194"
+                height="250"
                 image={iti.photo}
                 alt="Paella dish"
               />
@@ -50,13 +62,14 @@ export default function Itinerary({ filter }) {
                   {iti.duration}
                 </Typography>
               </CardContent>
-              <CardActions disableSpacing>
+              <CardActions
+                disableSpacing
+                sx={{ display: "flex", justifyContent: "space-between" }}
+              >
                 <IconButton aria-label="add to favorites">
                   <FavoriteIcon />
                 </IconButton>
-                <IconButton aria-label="share">
-                  <ShareIcon />
-                </IconButton>
+
                 <ExpandMore
                   expand={expanded}
                   onClick={handleExpandClick}
@@ -79,8 +92,9 @@ export default function Itinerary({ filter }) {
                   </Typography>
                 </CardContent>
               </Collapse>
-            </Card>;
-          })}
-    </>
+            </Card>
+          );
+        })}
+    </Box>
   );
 }
