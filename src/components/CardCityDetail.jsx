@@ -7,8 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 
-export default function CardCityDetail({ city }) {
+
+export default function CardCityDetail({ city, handleShowItineraries, show }) {
   return (
     <>
       <Box
@@ -19,7 +21,7 @@ export default function CardCityDetail({ city }) {
       >
         <Card
           sx={{
-            width: { xs: "80vw", md: "50vw" },
+            width: { xs: "90vw", md: "70vw" },
             m: 2,
             backgroundColor: "transparent",
             boxShadow: "none",
@@ -33,18 +35,38 @@ export default function CardCityDetail({ city }) {
       title={city.city}
     /> */}
           <CardContent sx={{ backgroundColor: "transparent" }}>
-            <Typography variant="h2" sx={{ m: 2 }}>
+            <Typography
+              variant="h2"
+              sx={{ m: 2, textShadow: "black 0.1em 0.1em 0.2em" }}
+            >
               {city.city}
             </Typography>
-            <Typography variant="subtitle1">{city.description}</Typography>
+            <Typography
+              variant="subtitle1"
+              sx={{ textShadow: "black 0.1em 0.1em 0.2em" }}
+            >
+              {city.description}
+            </Typography>
           </CardContent>
           <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-            <Button
-              endIcon={<KeyboardDoubleArrowDownIcon />}
-              variant="contained"
-            >
-              View Itineraries
-            </Button>
+            {show === true ? (
+              <Button
+                endIcon={<KeyboardDoubleArrowUpIcon />}
+                variant="contained"
+                onClick={handleShowItineraries}
+                color="error"
+              >
+                Hide Itineraries
+              </Button>
+            ) : (
+              <Button
+                endIcon={<KeyboardDoubleArrowDownIcon />}
+                variant="contained"
+                onClick={handleShowItineraries}
+              >
+                View Itineraries
+              </Button>
+            )}
           </CardActions>
         </Card>
       </Box>

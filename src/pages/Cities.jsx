@@ -1,24 +1,17 @@
-import {
-  Box,
-  Card,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import CardCity from "../components/CardCity";
-import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import apiUrl from "../apiUrl";
 import { useDispatch, useSelector } from "react-redux";
 import city_actions from "../store/actions/cities";
 const { read_cities } = city_actions;
 
 const Cities = () => {
-  const [data, setData] = useState([""]);
   const [refSearch, setSearch] = useState({ city: "" });
   const cities = useSelector((store) => store.cities.cities);
-  console.log(cities, "cities");
+  const imgBackground =
+    "url(https://blog.localadventures.travel/wp-content/uploads/2022/07/PORTADAS-BLOG-54.png)";
+
   const dispatch = useDispatch();
 
   const handleFilter = (e) => {
@@ -35,6 +28,24 @@ const Cities = () => {
 
   return (
     <Box>
+      <Box
+        sx={{
+          textAlign: "center",
+          backgroundImage: imgBackground,
+          backgroundSize: "cover",
+          backgroundPosition: "start",
+          height: "30vh",
+          color: "white",
+          textShadow: "black 0.1em 0.1em 0.2em"
+        }}
+      >
+        <Typography variant="h3" sx={{ width: "100%", pt: 10 }}>
+          Cities
+        </Typography>
+        <Typography variant="h6">
+          Collection of the most beautiful places and experience
+        </Typography>
+      </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <TextField
           name="city"
