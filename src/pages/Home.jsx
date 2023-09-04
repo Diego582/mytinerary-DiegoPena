@@ -26,7 +26,7 @@ const Home = () => {
         display: "flex",
         justifyContent: "center",
         width: { md: "80vw" },
-        mt: 3,
+        mt: 15,
         flexWrap: "wrap",
       }}
     >

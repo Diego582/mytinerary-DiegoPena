@@ -46,7 +46,7 @@ export default function CardCity({ images }) {
                     height: "100%",
                     background:
                       "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
-                      "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+                      "rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)",
                     display: "grid",
                     justifyContent: "space-between",
                   }}
@@ -61,7 +61,7 @@ export default function CardCity({ images }) {
                       }}
                     >
                       <Box sx={{ width: "100%", mb: 4 }}>
-                        <IconButton sx={{ color: "rgba(255, 255, 255, 0.54)" }}>
+                        <IconButton sx={{ color: "rgba(255, 255, 255, 0.9)" }}>
                           <LocationOnIcon />
                           <Typography variant="subtitle2">
                             {img.country}

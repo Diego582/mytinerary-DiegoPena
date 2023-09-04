@@ -5,11 +5,10 @@ import MenuNav from "./MenuNav";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function NavBar() {
+export default function NavBar({ position }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
-    console.log(event.currentTarget);
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -17,11 +16,11 @@ export default function NavBar() {
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
+    <Box sx={{ display: "flex", alignItems: "center" }}>
       <AppBar
-        position="static"
+        position={position}
         color="transparent"
-        sx={{ width: "75vw", boxShadow: "none", pt: 2 }}
+        sx={{ width: "95vw", boxShadow: "none" }}
       >
         <Box
           sx={{
@@ -31,17 +30,23 @@ export default function NavBar() {
           }}
         >
           <ImageListItem sx={{ width: { xs: "70vw", sm: "20vw" } }}>
-            <img src="./logo.png" alt="Logo" loading="lazy" />
+            <img
+              src="https://i.im.ge/2023/09/04/wPBUVr.logo.png"
+              alt="Logo"
+              loading="lazy"
+            />
           </ImageListItem>
-          <Box sx={{ display: { xs: "block", sm: "none" } }}>
+          <Box
+            sx={{ display: { xs: "block", sm: "none" }, p: { xs: 2, sm: 1 } }}
+          >
             <MenuNav handleClick={handleClick} />
           </Box>
-          <Box sx={{ m: 1, p: 1, display: { xs: "none", sm: "block" } }}>
+          <Box sx={{ m: 1, p: 1, display: { xs: "none", sm: "block" }, textShadow: "black 0.1em 0.1em 0.2em" }}>
             <Link to="/">
-              <ButNav variant="text" icon="" color="black" text="Home" />
+              <ButNav variant="contained" icon="" color="white" text="Home" />
             </Link>
             <Link to="/cities">
-              <ButNav variant="text" icon="" color="black" text="Cities" />
+              <ButNav variant="contained" icon="" color="white" text="Cities" />
             </Link>
             <Link to="/signin">
               <ButNav

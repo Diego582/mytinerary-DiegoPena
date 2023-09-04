@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 export default function MainLayout() {
   return (
     <Box className="Main-Layout">
-      <NavBar />
+      <NavBar position="absolute" />
       <Outlet />
       <Footer />
     </Box>
