@@ -5,6 +5,7 @@ import Cities from "./pages/Cities";
 import SignIn from "./pages/SignIn";
 import CityDetail from "./pages/CityDetail";
 import MainLayoutBackground from "./layouts/MainLayoutBackground";
+import SignUp from "./pages/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/cities", element: <Cities /> },
       { path: "/signin", element: <SignIn /> },
+      { path: "/signup", element: <SignUp /> },
       { path: "/cities/:id", element: <CityDetail /> },
     ],
   },
