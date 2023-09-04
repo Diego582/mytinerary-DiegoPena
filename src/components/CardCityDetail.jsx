@@ -9,7 +9,6 @@ import {
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 
-
 export default function CardCityDetail({ city, handleShowItineraries, show }) {
   return (
     <>
@@ -54,7 +53,7 @@ export default function CardCityDetail({ city, handleShowItineraries, show }) {
                 endIcon={<KeyboardDoubleArrowUpIcon />}
                 variant="contained"
                 onClick={handleShowItineraries}
-                color="error"
+                color="secondary"
               >
                 Hide Itineraries
               </Button>

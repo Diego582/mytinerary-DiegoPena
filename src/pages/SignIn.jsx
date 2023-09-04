@@ -10,15 +10,28 @@ const SignIn = () => {
     <Box
       sx={{
         backgroundImage: urlBackground,
-        width: "100vw",
+        width: "100%",
         height: "100vh",
         backgroundSize: "cover",
       }}
     >
-      <Typography variant="h3" sx={{ m: 2, textAlign: "center" }}>
-        This is SignIn
-      </Typography>
-      <CardSigin />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          p: 15,
+        }}
+      >
+        <Typography
+          variant="h3"
+          color="secondary"
+          sx={{ m: 2, textAlign: "center" }}
+        >
+          My Tinerary
+        </Typography>
+        <CardSigin />
+      </Box>
     </Box>
   );
 };
