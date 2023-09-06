@@ -21,6 +21,12 @@ const theme = createTheme({
     colorsCards: {
       main: "#3EF029",
     },
+    primarySignup: {
+      main: "#72733B",
+    },
+    secondarySignup: {
+      main: "#D9B218",
+    },
     error: {
       main: "#F04835",
     },

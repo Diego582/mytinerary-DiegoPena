@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import CardSigin from "../components/CardSigin";
+import CardSigin from "../components/CardSignin";
 
 const SignIn = () => {
   const urlBackground =
@@ -11,16 +11,19 @@ const SignIn = () => {
       sx={{
         backgroundImage: urlBackground,
         width: "100%",
-        height: "100vh",
+        minHeight: "100vh",
         backgroundSize: "cover",
+        pb: 5,
       }}
     >
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: { xs: "center", md: "space-between" },
           alignItems: "center",
-          p: 15,
+          flexWrap: "wrap",
+          p: { xs: 0, md: 15 },
+          pt: { xs: 10 },
         }}
       >
         <Typography
