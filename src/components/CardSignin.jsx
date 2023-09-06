@@ -41,6 +41,7 @@ export default function CardSigin() {
             flexDirection: "column",
             justifyContent: "space-between",
             height: "75%",
+            gap: 2,
           }}
         >
           <Typography variant="body2">step 1 of 2</Typography>
@@ -66,7 +67,7 @@ export default function CardSigin() {
             <Button
               onClick={handleStep}
               color="secondary"
-              sx={{ width: "25%" }}
+              sx={{ width: { xs: "100%", md: "25%" } }}
               variant="contained"
             >
               Continue
@@ -76,9 +77,13 @@ export default function CardSigin() {
           <Button
             color="fourth"
             dark
-            startIcon={<GoogleIcon />}
+            startIcon={
+              <Avatar
+                alt="Google"
+                src="https://static.vecteezy.com/system/resources/previews/010/353/285/non_2x/colourful-google-logo-on-white-background-free-vector.jpg"
+              />
+            }
             variant="contained"
-            sx={{ color: "#F029AA" }}
           >
             Continue with Google
           </Button>
@@ -93,6 +98,7 @@ export default function CardSigin() {
             flexDirection: "column",
             justifyContent: "space-between",
             height: "75%",
+            gap: 2,
           }}
         >
           <Typography variant="body2">step 2 of 2</Typography>
@@ -136,7 +142,11 @@ export default function CardSigin() {
             </IconButton>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "end" }}>
-            <Button color="secondary" sx={{ width: "25%" }} variant="contained">
+            <Button
+              color="secondary"
+              sx={{ width: { xs: "100%", md: "25%" } }}
+              variant="contained"
+            >
               Continue
             </Button>
           </Box>
@@ -144,9 +154,13 @@ export default function CardSigin() {
           <Button
             color="fourth"
             dark
-            startIcon={<GoogleIcon />}
+            startIcon={
+              <Avatar
+                alt="Google"
+                src="https://static.vecteezy.com/system/resources/previews/010/353/285/non_2x/colourful-google-logo-on-white-background-free-vector.jpg"
+              />
+            }
             variant="contained"
-            sx={{ color: "#F029AA" }}
           >
             Continue with Google
           </Button>
