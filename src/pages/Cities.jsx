@@ -34,12 +34,12 @@ const Cities = () => {
           backgroundImage: imgBackground,
           backgroundSize: "cover",
           backgroundPosition: "start",
-          height: "30vh",
+          minHeight: "30vh",
           color: "white",
           textShadow: "black 0.1em 0.1em 0.2em"
         }}
       >
-        <Typography variant="h3" sx={{ width: "100%", pt: 10 }}>
+        <Typography variant="h3" sx={{ width: "100%", pt: 15 }}>
           Cities
         </Typography>
         <Typography variant="h6">

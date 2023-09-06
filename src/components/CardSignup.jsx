@@ -203,7 +203,7 @@ export default function CardSignup({ countries }) {
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "end" }}>
             <Button
-              color="secondary"
+              color="primary"
               sx={{ width: { xs: "100%", md: "25%" } }}
               variant="contained"
             >
