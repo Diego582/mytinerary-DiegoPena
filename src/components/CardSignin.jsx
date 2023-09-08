@@ -16,6 +16,9 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useDispatch, useSelector } from "react-redux";
+import users_actions from "../store/actions/users";
+const { signin } = users_actions;
 
 export default function CardSigin() {
   const [step, setStep] = useState(0);
@@ -25,7 +28,25 @@ export default function CardSigin() {
   const handleStep = () => {
     setStep(1);
   };
+  const [data, setData] = useState({
+    mail: "",
+    password: "",
+  });
+  const user = useSelector((store) => console.log(store));
+  const dispatch = useDispatch();
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  const handleSignin = () => {
+    dispatch(signin({ data }));
+  };
+
+  console.log(data, "esto es data");
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -55,13 +76,13 @@ export default function CardSigin() {
             </Link>
           </Box>
           <TextField
-            value={username}
+            name="mail"
             id="standard-password-input"
             label="Email"
             type="email"
             variant="standard"
             color="secondary"
-            onChange={(event) => setUsername(event.target.value)}
+            onChange={handleChange}
           />
           <Box sx={{ display: "flex", justifyContent: "end" }}>
             <Button
@@ -124,8 +145,8 @@ export default function CardSigin() {
             <TextField
               type={showPassword ? "text" : "password"}
               id="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              name="password"
+              onChange={handleChange}
               label="Password"
               required
               variant="standard"
@@ -143,6 +164,7 @@ export default function CardSigin() {
           </Box>
           <Box sx={{ display: "flex", justifyContent: "end" }}>
             <Button
+              onClick={handleSignin}
               color="secondary"
               sx={{ width: { xs: "100%", md: "25%" } }}
               variant="contained"

@@ -117,7 +117,7 @@ export default function Itinerary({ filter, show }) {
                         Duration:
                       </Typography>
                       <Typography variant="h6" sx={{ width: "100%" }}>
-                        {iti.duration} Hs.
+                        {iti.duration / 60} Hs.
                       </Typography>
                     </Box>
                     <Box sx={{ width: { xs: "80vw", sm: "20vw" } }}>
