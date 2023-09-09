@@ -61,8 +61,8 @@ const SignUp = () => {
       label: "Venezuela",
     },
     {
-      value: " ",
-      label: " ",
+      value: "Select an option",
+      label: "Select an option",
     },
   ];
 
