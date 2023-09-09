@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import city_actions from "../store/actions/cities";
 import CardCityDetail from "../components/CardCityDetail";
 import Features from "../components/Features";
-import Itinerary from "../components/Itinerary";
+import Itinerary from "./Itinerary";
 const { read_city } = city_actions;
 
 const CityDetail = () => {

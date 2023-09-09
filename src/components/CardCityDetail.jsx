@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
+import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
+import { Link } from "react-router-dom";
 
 export default function CardCityDetail({ city, handleShowItineraries, show }) {
   return (
@@ -27,12 +29,6 @@ export default function CardCityDetail({ city, handleShowItineraries, show }) {
             color: "white",
           }}
         >
-          {/*   <CardMedia
-      component="img"
-      sx={{ height: "50vh" }}
-      src={city.photo}
-      title={city.city}
-    /> */}
           <CardContent sx={{ backgroundColor: "transparent" }}>
             <Typography
               variant="h2"
@@ -47,25 +43,48 @@ export default function CardCityDetail({ city, handleShowItineraries, show }) {
               {city.description}
             </Typography>
           </CardContent>
-          <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-            {show === true ? (
-              <Button
-                endIcon={<KeyboardDoubleArrowUpIcon />}
-                variant="contained"
-                onClick={handleShowItineraries}
-                color="secondary"
-              >
-                Hide Itineraries
-              </Button>
-            ) : (
-              <Button
-                endIcon={<KeyboardDoubleArrowDownIcon />}
-                variant="contained"
-                onClick={handleShowItineraries}
-              >
-                View Itineraries
-              </Button>
-            )}
+          <CardActions
+            sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
+          >
+            <Box sx={{ width: "100%", m: 1 }}>
+              {show === true ? (
+                <Link to="/cities">
+                  <Button
+                    endIcon={<KeyboardReturnIcon />}
+                    variant="contained"
+                    color="secondary"
+                  >
+                    return
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/cities">
+                  <Button endIcon={<KeyboardReturnIcon />} variant="contained">
+                    return
+                  </Button>
+                </Link>
+              )}
+            </Box>
+            <Box sx={{ width: "100%", m: 1 }}>
+              {show === true ? (
+                <Button
+                  endIcon={<KeyboardDoubleArrowUpIcon />}
+                  variant="contained"
+                  onClick={handleShowItineraries}
+                  color="secondary"
+                >
+                  Hide Itineraries
+                </Button>
+              ) : (
+                <Button
+                  endIcon={<KeyboardDoubleArrowDownIcon />}
+                  variant="contained"
+                  onClick={handleShowItineraries}
+                >
+                  View Itineraries
+                </Button>
+              )}
+            </Box>
           </CardActions>
         </Card>
       </Box>

@@ -8,12 +8,11 @@ const read_itineraries_city = createAsyncThunk(
     //callback que realiza la petición
     try {
       let data = await axios(apiUrl + "itineraries?city_id=" + obj.filter.id);
-      console.log(data, "data de action");
+
       return {
         itinerariesCity: data.data.response,
       };
     } catch (error) {
-      console.log(error);
       return {
         itinerariesCity: [],
       };
