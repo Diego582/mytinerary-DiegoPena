@@ -13,8 +13,7 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
-import GoogleIcon from "@mui/icons-material/Google";
-import FacebookIcon from "@mui/icons-material/Facebook";
+
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
@@ -26,6 +25,7 @@ export default function CardSignup({ countries }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [newUser, setNewUser] = useState({});
   const handleStep = () => {
     setStep(1);
   };
@@ -34,8 +34,14 @@ export default function CardSignup({ countries }) {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  console.log(username, "username");
-  console.log(password, "password");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewUser((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  console.log(newUser, "newUser");
   return (
     <Card sx={{ width: { xs: "80vw", md: "40vw" }, minHeight: "75vh" }}>
       {step == 0 ? (
@@ -73,19 +79,19 @@ export default function CardSignup({ countries }) {
           </Box>
 
           <TextField
-            value={username}
+            name="mail"
             id="standard-password-input"
             label="Email"
             type="email"
             variant="standard"
             color="secondarySignup"
-            onChange={(event) => setUsername(event.target.value)}
+            onChange={handleChange}
           />
           <TextField
             type={showPassword ? "text" : "password"}
             id="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            name="password"
+            onChange={handleChange}
             label="Password"
             required
             variant="standard"
@@ -117,7 +123,7 @@ export default function CardSignup({ countries }) {
           <Typography variant="h5" sx={{ color: "#D9B218" }}>
             Create account
           </Typography>
-          <Box sx={{ display: "flex", gap: 1 }}>
+          <Box sx={{ display: "flex", gap: 3 }}>
             <Typography variant="body2">Already have an account?</Typography>
             <Link to="/signin">
               <Typography variant="subtitle2">Sign in</Typography>
@@ -136,40 +142,26 @@ export default function CardSignup({ countries }) {
               type="text"
               label="First Name"
               variant="standard"
+              name="name"
+              onChange={handleChange}
             />
             <TextField
               sx={{ width: { xs: "100%", sm: "45%" } }}
               type="text"
               label="Last Name"
               variant="standard"
+              name="lastName"
+              onChange={handleChange}
             />
           </Box>
-          <Box>
-            <Typography variant="caption">Date of birth</Typography>
-            <InfoIcon fontSize="x-small" color="primary" sx={{ ml: 1 }} />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              width: "100%",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-            }}
-          >
-            <TextField
-              sx={{ width: { xs: "100%", sm: "45%" } }}
-              type="text"
-              label="Month"
-              variant="standard"
-            />
-            <TextField
-              sx={{ width: { xs: "100%", sm: "45%" } }}
-              type="text"
-              label="Year"
-              variant="standard"
-            />
-          </Box>
-          <TextField type="text" label="Photo" variant="standard" />
+
+          <TextField
+            type="text"
+            label="Photo"
+            variant="standard"
+            name="photo"
+            onChange={handleChange}
+          />
           <Box
             sx={{
               display: "flex",
@@ -179,6 +171,8 @@ export default function CardSignup({ countries }) {
           >
             <TextField
               select
+              name="country"
+              onChange={handleChange}
               label="Country/Region"
               variant="standard"
               sx={{ width: { xs: "100%", sm: "45%" } }}

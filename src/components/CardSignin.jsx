@@ -1,7 +1,6 @@
 import {
   Card,
   Typography,
-  CardHeader,
   Avatar,
   IconButton,
   CardContent,
@@ -10,7 +9,6 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -22,8 +20,6 @@ const { signin } = users_actions;
 
 export default function CardSigin() {
   const [step, setStep] = useState(0);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const handleStep = () => {
     setStep(1);
@@ -32,7 +28,7 @@ export default function CardSigin() {
     mail: "",
     password: "",
   });
-  const user = useSelector((store) => console.log(store));
+
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -46,13 +42,11 @@ export default function CardSigin() {
     dispatch(signin({ data }));
   };
 
-  console.log(data, "esto es data");
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  console.log(username, "username");
-  console.log(password, "password");
+
   return (
     <Card sx={{ width: { xs: "80vw", md: "40vw" }, height: "75vh" }}>
       {step == 0 ? (
@@ -97,7 +91,6 @@ export default function CardSigin() {
           <Divider />
           <Button
             color="fourth"
-            dark
             startIcon={
               <Avatar
                 alt="Google"
@@ -130,7 +123,7 @@ export default function CardSigin() {
             <Avatar />
             <Box>
               <Typography color="secondary" variant="body2">
-                {username}
+                {data.mail}
               </Typography>
               <Typography variant="body2">Personal Account</Typography>
             </Box>
@@ -175,7 +168,6 @@ export default function CardSigin() {
           <Divider />
           <Button
             color="fourth"
-            dark
             startIcon={
               <Avatar
                 alt="Google"
