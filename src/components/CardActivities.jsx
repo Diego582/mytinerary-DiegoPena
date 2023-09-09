@@ -16,9 +16,9 @@ export default function CardActivities({ data }) {
         flexWrap: { xs: "wrap", sm: "nowrap" },
       }}
     >
-      {data.map((item) => {
+      {data.map((item, index) => {
         return (
-          <Card sx={{ width: { xs: "80%", sm: "30%" } }}>
+          <Card key={index} sx={{ width: { xs: "80%", sm: "30%" } }}>
             <CardActionArea>
               <CardMedia
                 component="img"

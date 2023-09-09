@@ -14,22 +14,25 @@ import {
   Checkbox,
 } from "@mui/material";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InfoIcon from "@mui/icons-material/Info";
+import { useDispatch } from "react-redux";
+import user_actions from "../store/actions/users";
+const { signup } = user_actions;
 
 export default function CardSignup({ countries }) {
   const [step, setStep] = useState(0);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState({});
   const handleStep = () => {
     setStep(1);
   };
+  const navigate = useNavigate();
 
+  const dispatch = useDispatch();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -41,7 +44,13 @@ export default function CardSignup({ countries }) {
       [name]: value,
     }));
   };
-  console.log(newUser, "newUser");
+
+  const handleSend = (newUser) => {
+    dispatch(signup({ newUser }));
+    navigate("/signin");
+  };
+
+ 
   return (
     <Card sx={{ width: { xs: "80vw", md: "40vw" }, minHeight: "75vh" }}>
       {step == 0 ? (
@@ -87,17 +96,33 @@ export default function CardSignup({ countries }) {
             color="secondarySignup"
             onChange={handleChange}
           />
-          <TextField
-            type={showPassword ? "text" : "password"}
-            id="password"
-            name="password"
-            onChange={handleChange}
-            label="Password"
-            required
-            variant="standard"
-            color="secondarySignup"
-            sx={{ width: "100%" }}
-          />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <TextField
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              onChange={handleChange}
+              label="Password"
+              required
+              variant="standard"
+              color="secondarySignup"
+              sx={{ width: "100%" }}
+            />
+
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+            >
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </Box>
           <Box sx={{ display: "flex", justifyContent: "end" }}>
             <Button
               onClick={handleStep}
@@ -175,6 +200,7 @@ export default function CardSignup({ countries }) {
               onChange={handleChange}
               label="Country/Region"
               variant="standard"
+              defaultValue="Select an option"
               sx={{ width: { xs: "100%", sm: "45%" } }}
             >
               {countries &&
@@ -197,6 +223,9 @@ export default function CardSignup({ countries }) {
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "end" }}>
             <Button
+              onClick={() => {
+                handleSend(newUser);
+              }}
               color="primary"
               sx={{ width: { xs: "100%", md: "25%" } }}
               variant="contained"

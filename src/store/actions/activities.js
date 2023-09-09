@@ -10,7 +10,7 @@ const read_activities_itinerary = createAsyncThunk(
       let data = await axios(
         apiUrl + "activities?itinerary_id=" + obj.itinerary
       );
-      console.log(data, "data en actiities");
+
       return {
         activitiesItinerary: data.data.response,
       };

@@ -59,5 +59,19 @@ const signout = createAsyncThunk("signout", async () => {
   }
 });
 
-const user_actions = { signin, signin_token, signout };
+const signup = createAsyncThunk("signup", async (obj) => {
+  
+  try {
+    let data = await axios.post(apiUrl + "auth/signup", obj.newUser);
+    return {
+      newUser: data.data.response,
+    };
+  } catch (error) {
+    return {
+      newUser: {},
+    };
+  }
+});
+
+const user_actions = { signin, signin_token, signout, signup };
 export default user_actions;

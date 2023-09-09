@@ -33,9 +33,15 @@ export default function CardItineraries() {
   };
 
   const handleExpandClick = (itinerary) => {
-    setExpanded(!expanded);
+    console.log(itinerary, "itinerary");
+    let id = itinerary._id;
+    setExpanded((prevExpanded) => ({
+      ...prevExpanded,
+      [id]: !prevExpanded[id],
+    }));
     dispatch(read_activities_itinerary({ itinerary: itinerary._id }));
   };
+  console.log(itineraries, "itineraries");
   return (
     <>
       {itineraries.length > 0 ? (
@@ -132,7 +138,7 @@ export default function CardItineraries() {
                   {expanded === true ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                 </IconButton>
               </CardActions>
-              <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <Collapse in={expanded[iti._id]} timeout="auto" unmountOnExit>
                 <CardContent>
                   <Activities />
                 </CardContent>
