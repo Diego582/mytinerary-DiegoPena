@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import NavBar from "./NavBar";
 
 export default function Footer() {
-  const urlImg = "url(https://i.im.ge/2023/09/04/wPB2i4.footer.jpg)";
+  const urlImg = "url(http://imgfz.com/i/rkURi8C.jpeg)";
   return (
     <Box
       sx={{

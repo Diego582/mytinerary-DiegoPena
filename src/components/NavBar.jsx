@@ -13,7 +13,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ButNav from "./ButNav";
 import MenuNav from "./MenuNav";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import user_actions from "../store/actions/users";
 const { signout } = user_actions;
@@ -23,11 +23,16 @@ export default function NavBar({ position }) {
   const open = Boolean(anchorEl);
   const user = useSelector((store) => store.users.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleLogout = () => {
+    dispatch(signout());
+    navigate("/");
   };
 
   return (
@@ -53,14 +58,17 @@ export default function NavBar({ position }) {
           >
             <ImageListItem sx={{ width: { xs: "70vw", sm: "20vw" } }}>
               <img
-                src="https://i.im.ge/2023/09/04/wPBUVr.logo.png"
+                src="http://imgfz.com/i/zx7Vecm.png"
                 alt="Logo"
                 loading="lazy"
               />
             </ImageListItem>
           </Box>
           <Box
-            sx={{ display: { xs: "block", sm: "none" }, p: { xs: 2, sm: 1 } }}
+            sx={{
+              display: { xs: "block", sm: "none" },
+              p: { xs: 1, sm: 1 },
+            }}
           >
             <MenuNav handleClick={handleClick} />
           </Box>
@@ -82,9 +90,7 @@ export default function NavBar({ position }) {
 
             {user.name ? (
               <Button
-                onClick={() => {
-                  dispatch(signout());
-                }}
+                onClick={handleLogout}
                 variant="contained"
                 startIcon={<LogoutIcon />}
                 sx={{ m: 1, p: 1, pr: 2, pl: 2 }}

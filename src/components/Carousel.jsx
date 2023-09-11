@@ -2,16 +2,20 @@ import {
   Box,
   Card,
   CardActions,
+  CardContent,
+  CardMedia,
   Grid,
   IconButton,
   ImageList,
   ImageListItem,
   ImageListItemBar,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 import Container from "@mui/material/Container";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+import InfoIcon from "@mui/icons-material/Info";
 
 const Carousel = ({ images }) => {
   const [position, setPosition] = useState(0);
@@ -26,10 +30,6 @@ const Carousel = ({ images }) => {
     setPosition(position == 0 ? images.length - 4 : position - 4);
     setPositionTo(position == 0 ? images.length : positionTo - 4);
   };
-
-  if (images.length > 0) {
-    setTimeout(handleNextPosition, 5000);
-  }
 
   return (
     <Container disableGutters sx={{ width: { md: "50vw" } }}>
@@ -49,39 +49,52 @@ const Carousel = ({ images }) => {
                 <Card
                   xs={12}
                   sx={{
-                    backgroundColor: "#EBEBEB",
+                    backgroundColor: "#C9A226",
                     padding: 0,
+                    width: "100%",
                   }}
                 >
-                  <ImageList
+                  <Box
                     sx={{
                       display: "flex",
-                      justifyContent: { xs: "space-around" },
+                      justifyContent: {
+                        xs: "space-around",
+                        md: "space-between",
+                      },
                       flexWrap: "wrap",
                     }}
-                    rowHeight={160}
                   >
                     {item.length > 0 &&
                       item.map((img, index) => {
                         return (
-                          <ImageListItem
+                          <Card
                             key={index}
-                            sx={{ m: 1, width: { xs: "60vw", sm: "20vw" } }}
+                            sx={{
+                              width: { xs: "60vw", md: "22vw" },
+                              m: 1,
+                            }}
                           >
-                            <img
-                              src={img.photo}
-                              srcSet={img.photo}
+                            <CardMedia
+                              component="img"
+                              sx={{ height: { xs: "140px", lg: "190px" } }}
+                              image={img.photo}
                               alt={img.city}
-                              loading="lazy"
                             />
-                            <ImageListItemBar
-                              title={img.city}
-                              sx={{ textAlign: "center" }}
-                            />
-                          </ImageListItem>
+                            <CardContent
+                              sx={{
+                                textAlign: "center",
+                                backgroundColor: "#621AD9",
+                                color: "white",
+                              }}
+                            >
+                              <Typography variant="body2" component="div">
+                                {img.city}
+                              </Typography>
+                            </CardContent>
+                          </Card>
                         );
                       })}
-                  </ImageList>
+                  </Box>
                   <CardActions
                     sx={{
                       display: "flex",
