@@ -18,30 +18,27 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import Activities from "../pages/Activities";
 import { useState } from "react";
-import activity_actions from "../store/actions/activities";
-import { useDispatch, useSelector } from "react-redux";
 
-const { read_activities_itinerary } = activity_actions;
+import { useSelector } from "react-redux";
+import Comments from "../pages/Comment";
 
 export default function CardItineraries() {
   const [expanded, setExpanded] = useState(false);
   const [count, setCount] = useState(0);
   const itineraries = useSelector((store) => store.itineraries.itinerariesCity);
-  const dispatch = useDispatch();
+  const user = useSelector((store) => store.users.user);
   const handleCountFavorite = () => {
     setCount(count + 1);
   };
 
   const handleExpandClick = (itinerary) => {
-    console.log(itinerary, "itinerary");
     let id = itinerary._id;
     setExpanded((prevExpanded) => ({
       ...prevExpanded,
       [id]: !prevExpanded[id],
     }));
-    dispatch(read_activities_itinerary({ itinerary: itinerary._id }));
   };
-  console.log(itineraries, "itineraries");
+
   return (
     <>
       {itineraries.length > 0 ? (
@@ -122,14 +119,26 @@ export default function CardItineraries() {
                 disableSpacing
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
-                <IconButton
-                  aria-label="add to favorites"
-                  onClick={handleCountFavorite}
-                >
-                  <Badge badgeContent={count} color="primary">
-                    <FavoriteIcon />
-                  </Badge>
-                </IconButton>
+                {user.name ? (
+                  <IconButton
+                    aria-label="add to favorites"
+                    onClick={handleCountFavorite}
+                  >
+                    <Badge badgeContent={count} color="primary" showZero>
+                      <FavoriteIcon />
+                    </Badge>
+                  </IconButton>
+                ) : (
+                  <IconButton
+                    disabled
+                    aria-label="add to favorites"
+                    onClick={handleCountFavorite}
+                  >
+                    <Badge badgeContent={count} color="primary" showZero>
+                      <FavoriteIcon />
+                    </Badge>
+                  </IconButton>
+                )}
                 <IconButton
                   onClick={() => {
                     handleExpandClick(iti);
@@ -140,7 +149,8 @@ export default function CardItineraries() {
               </CardActions>
               <Collapse in={expanded[iti._id]} timeout="auto" unmountOnExit>
                 <CardContent>
-                  <Activities />
+                  <Activities itinerary={iti._id} />
+                  <Comments />
                 </CardContent>
               </Collapse>
             </Card>

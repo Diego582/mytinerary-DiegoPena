@@ -6,7 +6,9 @@ import city_actions from "../store/actions/cities";
 import CardCityDetail from "../components/CardCityDetail";
 import Features from "../components/Features";
 import Itinerary from "./Itinerary";
+import activity_actions from "../store/actions/activities";
 const { read_city } = city_actions;
+const { read_activities_itinerary } = activity_actions;
 
 const CityDetail = () => {
   const params = useParams();
@@ -14,8 +16,15 @@ const CityDetail = () => {
   const dispatch = useDispatch();
   const [showItineraries, setShowItineraries] = useState(false);
   const urlImg = "url(" + city.photo + ")";
+  const itineraries = useSelector((store) => store.itineraries.itinerariesCity);
+
   const handleShowItineraries = () => {
     setShowItineraries(!showItineraries);
+    dispatch(
+      read_activities_itinerary({
+        itineraries: itineraries.map((itinerary) => itinerary._id),
+      })
+    );
   };
 
   useEffect(() => {
