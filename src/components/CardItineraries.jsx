@@ -144,7 +144,11 @@ export default function CardItineraries() {
                     handleExpandClick(iti);
                   }}
                 >
-                  {expanded === true ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  {expanded[iti._id] === true ? (
+                    <ExpandLessIcon />
+                  ) : (
+                    <ExpandMoreIcon />
+                  )}
                 </IconButton>
               </CardActions>
               <Collapse in={expanded[iti._id]} timeout="auto" unmountOnExit>
