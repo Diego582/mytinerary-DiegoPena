@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 import CardActivities from "../components/CardActivities";
 
-const Activities = () => {
+const Activities = ({ itinerary }) => {
   let activities = useSelector((store) => store.activities.activitiesItinerary);
-  
+
   return (
     <>
-      <CardActivities data={activities} />
+      <CardActivities data={activities} filter={itinerary} />
     </>
   );
 };
