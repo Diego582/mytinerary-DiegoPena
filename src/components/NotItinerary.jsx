@@ -14,7 +14,7 @@ export default function NotItinerary() {
         <CardMedia
           component="img"
           title="Not Itineraries"
-          image="https://i.im.ge/2023/09/04/wP4VGL.sinitineraries.png"
+          image="http://imgfz.com/i/0TL6bFG.png"
         />
       </CardActionArea>
       <CardContent>

@@ -4,7 +4,6 @@ import MainLayout from "./layouts/MainLayout";
 import Cities from "./pages/Cities";
 import SignIn from "./pages/SignIn";
 import CityDetail from "./pages/CityDetail";
-import MainLayoutBackground from "./layouts/MainLayoutBackground";
 import SignUp from "./pages/SignUp";
 
 const router = createBrowserRouter([

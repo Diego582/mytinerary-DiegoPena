@@ -32,8 +32,7 @@ const Carousel = ({ images }) => {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-  console.log(images, "iamges");
-  console.log(activeStep, "activestep");
+
   return (
     <Box sx={{ width: { xs: "80vw", sm: "50vw" } }}>
       <Box
@@ -68,9 +67,8 @@ const Carousel = ({ images }) => {
                     >
                       {array.map((step, index) => {
                         return (
-                          <Box>
+                          <Box key={index}>
                             <CardMedia
-                              key={index}
                               component="img"
                               sx={{
                                 height: "20vh",
@@ -91,7 +89,9 @@ const Carousel = ({ images }) => {
                         );
                       })}
                     </CardContent>
-                  ) : null}
+                  ) : (
+                    <Box></Box>
+                  )}
                 </Card>
               );
             })}
