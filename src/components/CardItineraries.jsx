@@ -58,6 +58,7 @@ export default function CardItineraries() {
                   justifyContent: "space-between",
                   alignItems: "start",
                   flexWrap: { xs: "wrap", sm: "nowrap" },
+                  backgroundColor: "#F2EE9F",
                 }}
               >
                 <Box
@@ -117,7 +118,11 @@ export default function CardItineraries() {
               </CardContent>
               <CardActions
                 disableSpacing
-                sx={{ display: "flex", justifyContent: "space-between" }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  backgroundColor: "#F2EE9F",
+                }}
               >
                 {user.name ? (
                   <IconButton
@@ -152,9 +157,9 @@ export default function CardItineraries() {
                 </IconButton>
               </CardActions>
               <Collapse in={expanded[iti._id]} timeout="auto" unmountOnExit>
-                <CardContent>
+                <CardContent sx={{ backgroundColor: "#F2EE9F" }}>
                   <Activities itinerary={iti._id} />
-                  <Comments />
+                  {/* <Comments /> */}
                 </CardContent>
               </Collapse>
             </Card>

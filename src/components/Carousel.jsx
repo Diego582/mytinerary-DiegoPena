@@ -1,120 +1,132 @@
+import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import {
   Box,
+  Button,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
-  Grid,
-  IconButton,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
+  MobileStepper,
+  Paper,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import Container from "@mui/material/Container";
-import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import InfoIcon from "@mui/icons-material/Info";
+import React, { useState } from "react";
+import SwipeableViews from "react-swipeable-views-react-18-fix";
+import { autoPlay } from "react-swipeable-views-utils-react-18-fix";
+import { useTheme } from "@mui/material/styles";
+
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const Carousel = ({ images }) => {
-  const [position, setPosition] = useState(0);
-  const [positionTo, setPositionTo] = useState(4);
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = useState(0);
+  const maxSteps = images.length;
 
-  const handleNextPosition = () => {
-    setPosition(images.length <= positionTo ? 0 : position + 4);
-    setPositionTo(images.length <= positionTo ? 4 : positionTo + 4);
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const handleBeforePosition = () => {
-    setPosition(position == 0 ? images.length - 4 : position - 4);
-    setPositionTo(position == 0 ? images.length : positionTo - 4);
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+  };
+  console.log(images, "iamges");
+  console.log(activeStep, "activestep");
   return (
-    <Container disableGutters sx={{ width: { md: "50vw" } }}>
-      {images.length > 0 &&
-        [images.slice(position, positionTo)].map((item, index) => {
-          return (
-            <Box key={index}>
-              <Grid
-                margin={0}
-                container
-                sx={{
-                  display: "flex",
-                  flexGrow: 0.5,
-                  justifyContent: "space-between",
-                }}
-              >
-                <Card
-                  xs={12}
-                  sx={{
-                    backgroundColor: "#C9A226",
-                    padding: 0,
-                    width: "100%",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: {
-                        xs: "space-around",
-                        md: "space-between",
-                      },
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    {item.length > 0 &&
-                      item.map((img, index) => {
+    <Box sx={{ width: { xs: "80vw", sm: "50vw" } }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+        }}
+      >
+        <AutoPlaySwipeableViews
+          interval={5000}
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={activeStep}
+          onChangeIndex={handleStepChange}
+          enableMouseEvents
+        >
+          {images &&
+            images.length > 0 &&
+            images.map((array, indexT) => {
+              return (
+                <Card key={indexT}>
+                  {Math.abs(activeStep - indexT) <= 2 ? (
+                    <CardContent
+                      sx={{
+                        display: "flex",
+                        justifyContent: {
+                          xs: "space-around",
+                          md: "space-between",
+                        },
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      {array.map((step, index) => {
                         return (
-                          <Card
-                            key={index}
-                            sx={{
-                              width: { xs: "60vw", md: "22vw" },
-                              m: 1,
-                            }}
-                          >
+                          <Box>
                             <CardMedia
+                              key={index}
                               component="img"
-                              sx={{ height: { xs: "140px", lg: "190px" } }}
-                              image={img.photo}
-                              alt={img.city}
-                            />
-                            <CardContent
                               sx={{
-                                textAlign: "center",
-                                backgroundColor: "#621AD9",
-                                color: "white",
+                                height: "20vh",
+                                width: { xs: "70vw", sm: "42vw", md: "23vw" },
                               }}
+                              src={step.photo}
+                              alt={step.city}
+                            />
+                            <Typography
+                              gutterBottom
+                              variant="body2"
+                              component="div"
+                              sx={{ textAlign: "center" }}
                             >
-                              <Typography variant="body2" component="div">
-                                {img.city}
-                              </Typography>
-                            </CardContent>
-                          </Card>
+                              {step.city}
+                            </Typography>
+                          </Box>
                         );
                       })}
-                  </Box>
-                  <CardActions
-                    sx={{
-                      display: "flex",
-                      flexGrow: 0.5,
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <IconButton color="primary" onClick={handleBeforePosition}>
-                      <ArrowCircleLeftIcon />
-                    </IconButton>
-                    <IconButton color="primary" onClick={handleNextPosition}>
-                      <ArrowCircleRightIcon />
-                    </IconButton>
-                  </CardActions>
+                    </CardContent>
+                  ) : null}
                 </Card>
-              </Grid>
-            </Box>
-          );
-        })}
-    </Container>
+              );
+            })}
+        </AutoPlaySwipeableViews>
+      </Box>
+      <MobileStepper
+        steps={maxSteps}
+        position="static"
+        activeStep={activeStep}
+        nextButton={
+          <Button
+            size="small"
+            onClick={handleNext}
+            disabled={activeStep === maxSteps - 1}
+          >
+            Next
+            {theme.direction === "rtl" ? (
+              <KeyboardArrowLeft />
+            ) : (
+              <KeyboardArrowRight />
+            )}
+          </Button>
+        }
+        backButton={
+          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+            {theme.direction === "rtl" ? (
+              <KeyboardArrowRight />
+            ) : (
+              <KeyboardArrowLeft />
+            )}
+            Back
+          </Button>
+        }
+      />
+    </Box>
   );
 };
 

@@ -16,6 +16,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useDispatch, useSelector } from "react-redux";
 import users_actions from "../store/actions/users";
+import Swal from "sweetalert2";
 const { signin } = users_actions;
 
 export default function CardSigin() {
@@ -39,7 +40,24 @@ export default function CardSigin() {
     }));
   };
   const handleSignin = () => {
-    dispatch(signin({ data }));
+    dispatch(signin({ data }))
+      .then((res) => {
+        if (res.payload.token) {
+          Swal.fire({
+            icon: "success",
+            title: "Logged in !",
+          });
+        } else if (res.payload.messages.length > 0) {
+          Swal.fire({
+            title: "Something went wrong!",
+            icon: "error",
+            html: res.payload.messages.map((each) => `<p>${each}<p>`),
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);

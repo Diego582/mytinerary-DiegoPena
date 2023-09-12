@@ -7,6 +7,7 @@ const initial_state = {
   token: "",
   user: {},
   newUser: {},
+  messages: [],
 };
 
 const user_reducer = createReducer(initial_state, (build) =>
@@ -16,6 +17,7 @@ const user_reducer = createReducer(initial_state, (build) =>
         ...state,
         user: action.payload.user,
         token: action.payload.token,
+        messages: action.payload.messages,
       };
       return new_state;
     })
@@ -39,6 +41,7 @@ const user_reducer = createReducer(initial_state, (build) =>
       let new_state = {
         ...state,
         newUser: action.payload.newUser,
+        messages: action.payload.messages,
       };
       return new_state;
     })

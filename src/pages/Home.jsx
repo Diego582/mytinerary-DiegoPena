@@ -14,8 +14,6 @@ const Home = () => {
   const carousel = useSelector((store) => store.cities.carousel);
   const dispatch = useDispatch();
 
-  
-
   useEffect(() => {
     dispatch(read_carousel());
   }, []);
@@ -34,7 +32,7 @@ const Home = () => {
         sx={{
           display: "flex",
           flexWrap: "wrap",
-          width: { xs: "80%", sm: "40%" },
+          width: { xs: "80%", sm: "43%" },
           p: 3,
           alignContent: "space-between",
         }}
@@ -51,7 +49,7 @@ const Home = () => {
           <Button variant="contained">View More</Button>
         </Link>
       </Box>
-      <Box sx={{ width: { xs: "80%", sm: "40%" }, p: 3 }}>
+      <Box sx={{ width: { xs: "80%", sm: "45%" }, p: 3 }}>
         <Carousel images={carousel} />
       </Box>
     </Box>
