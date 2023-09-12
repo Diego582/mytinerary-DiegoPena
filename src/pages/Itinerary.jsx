@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import itinerary_actions from "../store/actions/itineraries";

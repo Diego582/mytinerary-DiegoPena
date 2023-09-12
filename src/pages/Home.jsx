@@ -1,9 +1,6 @@
 import { Box, Typography, Button } from "@mui/material";
 import Carousel from "../components/Carousel";
-import NavLayout from "../layouts/NavLayout";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import apiUrl from "../apiUrl.js";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import city_actions from "../store/actions/cities";
@@ -37,7 +34,15 @@ const Home = () => {
           alignContent: "space-between",
         }}
       >
-        <Typography variant="h4" color="initial" sx={{ textAlign: "center" }}>
+        <Typography
+          variant="h3"
+          color="initial"
+          sx={{
+            textAlign: "center",
+            textShadow: "black 0.1em 0.1em 0.2em",
+            color: "white",
+          }}
+        >
           Find the perfect destination
         </Typography>
         <Typography variant="h6" color="initial" sx={{ textAlign: "justify" }}>

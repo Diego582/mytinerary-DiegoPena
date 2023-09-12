@@ -20,7 +20,6 @@ import Activities from "../pages/Activities";
 import { useState } from "react";
 
 import { useSelector } from "react-redux";
-import Comments from "../pages/Comment";
 
 export default function CardItineraries() {
   const [expanded, setExpanded] = useState(false);

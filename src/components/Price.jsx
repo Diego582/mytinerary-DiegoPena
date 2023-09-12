@@ -1,5 +1,5 @@
-import { Box, Rating, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Rating } from "@mui/material";
+import React from "react";
 import { styled } from "@mui/material/styles";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import PriceChangeIcon from "@mui/icons-material/PriceChange";

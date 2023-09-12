@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react";
-import Home from "./pages/Home";
-import MainLayout from "./layouts/MainLayout";
-import Cities from "./pages/Cities";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import { useDispatch } from "react-redux";

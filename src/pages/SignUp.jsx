@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import CardSignup from "../components/CardSignup";
-import city_actions from "../store/actions/cities";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 

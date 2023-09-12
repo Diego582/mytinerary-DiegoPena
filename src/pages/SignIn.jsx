@@ -9,8 +9,7 @@ const SignIn = () => {
     "url(https://www.encuentra-tu-arquitecto.com/media/cache/remote_news_head/uploads/newsPicture/775909044908312087-La-experiencia-sensorial-en-la-arquitectura-60fe72f17804c.jpeg)";
 
   const user = useSelector((store) => store.users.user);
-  const store = useSelector((store) => store);
-  console.log(store, "store");
+
   return (
     <>
       {user.name ? (
