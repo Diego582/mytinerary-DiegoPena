@@ -29,7 +29,12 @@ export default function CardCityDetail({ city, handleShowItineraries, show }) {
             color: "white",
           }}
         >
-          <CardContent sx={{ backgroundColor: "transparent" }}>
+          <CardContent
+            sx={{
+              backgroundColor: "rgba(130, 82, 113, 0.7)",
+              boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+            }}
+          >
             <Typography
               variant="h2"
               sx={{ m: 2, textShadow: "black 0.1em 0.1em 0.2em" }}

@@ -12,11 +12,13 @@ const signin = createAsyncThunk(
       return {
         user: data.data.response.user,
         token: data.data.response.token,
+        messages: [],
       };
     } catch (error) {
       return {
         user: {},
         token: "",
+        messages: error.response.data.messages || [error.response.data.message],
       };
     }
   }
@@ -60,15 +62,16 @@ const signout = createAsyncThunk("signout", async () => {
 });
 
 const signup = createAsyncThunk("signup", async (obj) => {
-  
   try {
     let data = await axios.post(apiUrl + "auth/signup", obj.newUser);
     return {
       newUser: data.data.response,
+      messages: [],
     };
   } catch (error) {
     return {
       newUser: {},
+      messages: error.response.data.messages || [error.response.data.message],
     };
   }
 });

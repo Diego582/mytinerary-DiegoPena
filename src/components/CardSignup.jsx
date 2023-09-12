@@ -21,6 +21,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InfoIcon from "@mui/icons-material/Info";
 import { useDispatch } from "react-redux";
 import user_actions from "../store/actions/users";
+import Swal from "sweetalert2";
 const { signup } = user_actions;
 
 export default function CardSignup({ countries }) {
@@ -28,7 +29,11 @@ export default function CardSignup({ countries }) {
   const [showPassword, setShowPassword] = useState(false);
   const [newUser, setNewUser] = useState({});
   const handleStep = () => {
-    setStep(1);
+    if (step == 1) {
+      setStep(0);
+    } else {
+      setStep(1);
+    }
   };
   const navigate = useNavigate();
 
@@ -46,11 +51,27 @@ export default function CardSignup({ countries }) {
   };
 
   const handleSend = (newUser) => {
-    dispatch(signup({ newUser }));
-    navigate("/signin");
+    dispatch(signup({ newUser }))
+      .then((res) => {
+        if (res.payload.newUser.mail) {
+          Swal.fire({
+            icon: "success",
+            title: "User created successfully!",
+          });
+          navigate("/signin");
+        } else if (res.payload.messages.length > 0) {
+          Swal.fire({
+            title: "Something went wrong!",
+            icon: "error",
+            html: res.payload.messages.map((each) => `<p>${each}<p>`),
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
- 
   return (
     <Card sx={{ width: { xs: "80vw", md: "40vw" }, minHeight: "75vh" }}>
       {step == 0 ? (
@@ -144,11 +165,13 @@ export default function CardSignup({ countries }) {
             gap: 1,
           }}
         >
-          <Typography variant="body2">step 2 of 2</Typography>
-          <Typography variant="h5" sx={{ color: "#D9B218" }}>
+          <Typography variant="body2" sx={{ m: 1 }}>
+            step 2 of 2
+          </Typography>
+          <Typography variant="h5" sx={{ color: "#D9B218", m: 1 }}>
             Create account
           </Typography>
-          <Box sx={{ display: "flex", gap: 3 }}>
+          <Box sx={{ display: "flex", gap: 1, m: 1 }}>
             <Typography variant="body2">Already have an account?</Typography>
             <Link to="/signin">
               <Typography variant="subtitle2">Sign in</Typography>
@@ -160,6 +183,7 @@ export default function CardSignup({ countries }) {
               width: "100%",
               justifyContent: "space-between",
               flexWrap: "wrap",
+              m: 1,
             }}
           >
             <TextField
@@ -186,12 +210,14 @@ export default function CardSignup({ countries }) {
             variant="standard"
             name="photo"
             onChange={handleChange}
+            sx={{ m: 1 }}
           />
           <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
               flexWrap: "wrap",
+              m: 1,
             }}
           >
             <TextField
@@ -217,17 +243,31 @@ export default function CardSignup({ countries }) {
               label="Please contact me via email"
             />
           </Box>
-          <Typography variant="caption">
+          <Typography variant="caption" sx={{ m: 1 }}>
             By clicking Create account, I agree that I have read and accepted
             the Terms of Use and Privacy Policy.
           </Typography>
-          <Box sx={{ display: "flex", justifyContent: "end" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+            }}
+          >
+            <Button
+              onClick={handleStep}
+              color="secondary"
+              sx={{ width: { xs: "100%", md: "25%" }, color: "white", m: 1 }}
+              variant="contained"
+            >
+              Return
+            </Button>
             <Button
               onClick={() => {
                 handleSend(newUser);
               }}
               color="primary"
-              sx={{ width: { xs: "100%", md: "25%" } }}
+              sx={{ width: { xs: "100%", md: "25%" }, m: 1 }}
               variant="contained"
             >
               Continue
