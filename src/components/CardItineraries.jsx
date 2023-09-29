@@ -37,7 +37,7 @@ export default function CardItineraries() {
       [id]: !prevExpanded[id],
     }));
   };
-
+  console.log(expanded, "expanded");
   return (
     <>
       {itineraries.length > 0 ? (
